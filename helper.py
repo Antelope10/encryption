@@ -31,4 +31,4 @@ def modinv(a, m):
 def convertToNumber (s):
     return int.from_bytes(s.encode('utf-8'), 'little')
 def convertFromNumber (n):
-    return n.to_bytes(math.ceil(n.bit_1gth()/8), 'little').decode('utf-8')
+    return n.to_bytes(math.ceil(n.bit_length()/8), 'little').decode('utf-8')

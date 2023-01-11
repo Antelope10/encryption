@@ -1,5 +1,6 @@
 import random
 import helper as h
+import sys
 
 def packet_encrypt(m, pub_key):
     m = h.convertToNumber(m) 
@@ -14,10 +15,10 @@ def encrypt(m,pub_key):
         packets.append(m[pointer:pointer+12])
         pointer += 12
     packets.append(m[pointer:len(m)])
-    for packet in packets:
-        packet = packet_encrypt(packet,pub_key)
+    for i in range(len(packets)):
+        packets[i] = str(packet_encrypt(packets[i],pub_key))
     print(".".join(packets))
-    return packets
+    return ".".join(packets)
 
 def packet_decrypt(md, priv_key):
     md = int(md)
@@ -27,10 +28,9 @@ def packet_decrypt(md, priv_key):
     m = h.convertFromNumber(m)
 def decrypt(md,priv_key):
     md = md.split(".")
-    for packet in md:
-        packet = packet_decrypt(packet,priv_key)
+    for i in range(len(md)):
+        md[i] = packet_decrypt(md[i],priv_key)
     m = "".join(md)
-    print(m)
     return m
 
 def verifyKeys(pub_key, priv_key):
@@ -39,17 +39,28 @@ def verifyKeys(pub_key, priv_key):
     out = decrypt(out,priv_key)
     return out == testMessage
 
-pub_key = 0
-priv_key = 0
+key = 0
 
 def main():
-    contents = ""
-    with open('in.txt', 'r') as infile:
-        for line in infile:
-            return
-        with open('file.txt', 'w') as outfile:
-            outfile.write('Hello World!')
+    if len(sys.argv) != 2:
+        print("Specify e or d for encrypt or decrypt")
+        return
+    toggle = sys.argv[1]
+    if toggle != "e" and toggle != "d":
+        print("Invalid option")
+        return
 
-    
+    with open('keys.txt','r') as keys:
+        key = next(keys)
+    with open('in.txt', 'r') as infile:
+        contents = infile.read()
+        out = 0 
+        if toggle == "e":
+            out = encrypt(contents,key)
+        else:
+            out = decrypt(contents,key)
+        with open('out.txt', 'a') as outfile:
+            outfile.write(out)
+
 if __name__ == "__main__":
     main()
