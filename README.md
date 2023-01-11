@@ -1,4 +1,4 @@
-# encryption
+# RSA encryption
 
 Output key-pairs in terminal by running generate_keys.py.
 
