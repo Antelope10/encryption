@@ -25,7 +25,7 @@ def packet_decrypt(md, priv_key):
     n = int(priv_key.split('_')[0])
     d = int(priv_key.split('_')[1])
     m = pow(md,d,n)
-    m = h.convertFromNumber(m)
+    return h.convertFromNumber(m)
 def decrypt(md,priv_key):
     md = md.split(".")
     for i in range(len(md)):
@@ -47,7 +47,7 @@ def main():
         return
     toggle = sys.argv[1]
     if toggle != "e" and toggle != "d":
-        print("Invalid option")
+        print("Specify e or d for encrypt or decrypt")
         return
 
     with open('keys.txt','r') as keys:
