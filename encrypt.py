@@ -17,7 +17,6 @@ def encrypt(m,pub_key):
     packets.append(m[pointer:len(m)])
     for i in range(len(packets)):
         packets[i] = str(packet_encrypt(packets[i],pub_key))
-    print(".".join(packets))
     return ".".join(packets)
 
 def packet_decrypt(md, priv_key):
