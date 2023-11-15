@@ -1,4 +1,5 @@
 1894690492762328203968732295663_61
+#line above is the key used when running encrypt.py; ONLY the first line is read
 
 Personal:
     Public Key: 1894690492762328203968732295663_61
